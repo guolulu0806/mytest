@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yz.dao.GangweiMapper" >
+  <resultMap id="BaseResultMap" type="com.yz.entity.Gangwei" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="gangwei_name" property="gangweiName" jdbcType="VARCHAR" />
+    <result column="gangwei_code" property="gangweiCode" jdbcType="VARCHAR" />
+    <result column="order" property="order" jdbcType="INTEGER" />
+    <result column="gangwei_type" property="gangweiType" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="DATE" />
+    <result column="beizhu" property="beizhu" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, gangwei_name, gangwei_code, order, gangwei_type, update_time, beizhu, status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yz.entity.GangweiExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_gangwei
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_gangwei
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_gangwei
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yz.entity.GangweiExample" >
+    delete from t_gangwei
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yz.entity.Gangwei" >
+    insert into t_gangwei (id, gangwei_name, gangwei_code, 
+      order, gangwei_type, update_time, 
+      beizhu, status)
+    values (#{id,jdbcType=INTEGER}, #{gangweiName,jdbcType=VARCHAR}, #{gangweiCode,jdbcType=VARCHAR}, 
+      #{order,jdbcType=INTEGER}, #{gangweiType,jdbcType=VARCHAR}, #{updateTime,jdbcType=DATE}, 
+      #{beizhu,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yz.entity.Gangwei" >
+    insert into t_gangwei
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="gangweiName != null" >
+        gangwei_name,
+      </if>
+      <if test="gangweiCode != null" >
+        gangwei_code,
+      </if>
+      <if test="order != null" >
+        order,
+      </if>
+      <if test="gangweiType != null" >
+        gangwei_type,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="beizhu != null" >
+        beizhu,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="gangweiName != null" >
+        #{gangweiName,jdbcType=VARCHAR},
+      </if>
+      <if test="gangweiCode != null" >
+        #{gangweiCode,jdbcType=VARCHAR},
+      </if>
+      <if test="order != null" >
+        #{order,jdbcType=INTEGER},
+      </if>
+      <if test="gangweiType != null" >
+        #{gangweiType,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=DATE},
+      </if>
+      <if test="beizhu != null" >
+        #{beizhu,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yz.entity.GangweiExample" resultType="java.lang.Integer" >
+    select count(*) from t_gangwei
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_gangwei
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.gangweiName != null" >
+        gangwei_name = #{record.gangweiName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gangweiCode != null" >
+        gangwei_code = #{record.gangweiCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.order != null" >
+        order = #{record.order,jdbcType=INTEGER},
+      </if>
+      <if test="record.gangweiType != null" >
+        gangwei_type = #{record.gangweiType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=DATE},
+      </if>
+      <if test="record.beizhu != null" >
+        beizhu = #{record.beizhu,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_gangwei
+    set id = #{record.id,jdbcType=INTEGER},
+      gangwei_name = #{record.gangweiName,jdbcType=VARCHAR},
+      gangwei_code = #{record.gangweiCode,jdbcType=VARCHAR},
+      order = #{record.order,jdbcType=INTEGER},
+      gangwei_type = #{record.gangweiType,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=DATE},
+      beizhu = #{record.beizhu,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yz.entity.Gangwei" >
+    update t_gangwei
+    <set >
+      <if test="gangweiName != null" >
+        gangwei_name = #{gangweiName,jdbcType=VARCHAR},
+      </if>
+      <if test="gangweiCode != null" >
+        gangwei_code = #{gangweiCode,jdbcType=VARCHAR},
+      </if>
+      <if test="order != null" >
+        order = #{order,jdbcType=INTEGER},
+      </if>
+      <if test="gangweiType != null" >
+        gangwei_type = #{gangweiType,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=DATE},
+      </if>
+      <if test="beizhu != null" >
+        beizhu = #{beizhu,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yz.entity.Gangwei" >
+    update t_gangwei
+    set gangwei_name = #{gangweiName,jdbcType=VARCHAR},
+      gangwei_code = #{gangweiCode,jdbcType=VARCHAR},
+      order = #{order,jdbcType=INTEGER},
+      gangwei_type = #{gangweiType,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=DATE},
+      beizhu = #{beizhu,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
